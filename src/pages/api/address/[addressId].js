@@ -1,8 +1,8 @@
 const { createRoute } = require("@/api/createRoute")
-const { addressModel } = require("@/db/models/AddressModel")
+const { AddressModel } = require("@/db/models/AddressModel")
 const handle = createRoute(async (req, res) => {
   const { addressId } = req.query
-  const address = await addressModel.findById(addressId)
+  const address = await AddressModel.findById(addressId)
 
   if (req.method === "GET") {
     res.send(address)
@@ -26,7 +26,7 @@ const handle = createRoute(async (req, res) => {
   }
 
   if (req.method === "DELETE") {
-    await addressModel.deleteOne({ _id: addressId })
+    await AddressModel.deleteOne({ _id: addressId })
     res.send(address)
 
     return
