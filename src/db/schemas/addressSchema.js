@@ -1,6 +1,6 @@
-import { Schema } from "mongoose";
+import { Schema } from "mongoose"
 
-export const addressSchema = new Schema({
+export const AddressSchema = new Schema({
   title: {
     type: String,
     required: true,
@@ -14,4 +14,4 @@ export const addressSchema = new Schema({
     starNumber: { type: Number },
     medianPrice: { type: Number },
   },
-});
+})

@@ -23,7 +23,6 @@ const createPage = () => {
     { title, street, city, postalCode, country },
     { resetForm },
   ) => {
-    console.log(title)
     await axios.post("/api/address", {
       title,
       street,
@@ -33,6 +32,7 @@ const createPage = () => {
     })
     resetForm()
   }
+
   return (
     <>
       <Header />

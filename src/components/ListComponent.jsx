@@ -1,13 +1,10 @@
-import { Button } from "@/components/Button"
+import Link from "next/link"
 
 
-export const ListComponent =  ({_id,title,street,city,postalCode,country,...otherProps}) => {
-  
-  return (
-    <div>
+export const ListComponent =  ({_id,title,street,city,postalCode,country,...otherProps}) => (<Link href={`/address/${_id}`}>
+    <div {...otherProps}>
     <h2>{title}</h2>
     <span>{`${street}, ${city} ${postalCode} ${country}`}</span>
-      <Button className="">Edit</Button>
   </div>
+  </Link>
   )
-}
