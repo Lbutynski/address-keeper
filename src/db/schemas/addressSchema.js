@@ -14,4 +14,20 @@ export const AddressSchema = new Schema({
     starNumber: { type: Number },
     medianPrice: { type: Number },
   },
+  museumDetails: {
+    artisticCurrent: { type: String },
+    artType: { type: String },
+    priceOrder: { type: Number },
+    price: { type: Number },
+  },
+  barDetails: {
+    barType: { type: String },
+    priceOrder: { type: Number },
+  },
+  parcDetails: {
+    parcType: { type: String },
+    public: { type: Boolean },
+    priceOrder: { type: Number },
+    price: { type: Number },
+  },
 })
