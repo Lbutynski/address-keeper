@@ -1,8 +1,9 @@
 import { Button } from "@/components/Button"
+import { Form } from "@/components/Form"
 import { FormField } from "@/components/FormField"
 import { Header } from "@/components/Header"
 import axios from "axios"
-import { Form, Formik } from "formik"
+import { Formik } from "formik"
 import * as yup from "yup"
 const initialValues = {
   title: "",
@@ -41,7 +42,7 @@ const createPage = () => {
         initialValues={initialValues}
         validationSchema={validationSchema}
       >
-        <Form noValidate>
+        <Form>
           <FormField name="title" placeholder="Enter a title" />
           <FormField name="street" placeholder="Enter number and street" />
           <FormField name="city" placeholder="Enter city" />
