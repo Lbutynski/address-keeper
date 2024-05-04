@@ -5,6 +5,57 @@ import { Header } from "@/components/Header"
 import axios from "axios"
 import { Formik } from "formik"
 import * as yup from "yup"
+import { useState } from "react"
+import { Select } from "@/components/Select"
+
+const categoryList = ["Other", "Restaurant", "Museum", "Bar", "Parc"]
+const cuisineList = ["French", "Japanese", "Italian"]
+const starsNumberList = ["1", "2", "3"]
+const medianPricesList = ["1", "2", "3", "4", "5"]
+const artisticCurrentList = ["Modern", "Impressionism", "Romantic"]
+const priceOrderList = ["free", "1", "2", "3", "4", "5"]
+const parcTypesList = ["Parc floral", "Parc forestier"]
+const categoryFormFields = {
+  Restaurant: [
+    <Select key="cuisineType" name="cuisineType" optionsList={cuisineList} />,
+    <Select key="starNumber" name="starNumber" optionsList={starsNumberList} />,
+    <Select
+      key="medianPrice"
+      name="medianPrice"
+      optionsList={medianPricesList}
+    />,
+  ],
+  Museum: [
+    <Select
+      key="artisticCurrent"
+      name="artisticCurrent"
+      optionsList={artisticCurrentList}
+    />,
+    <FormField
+      key="artType"
+      name="artType"
+      placeholder="Enter the type of art"
+    />,
+    <Select key="priceOrder" name="priceOrder" optionsList={priceOrderList} />,
+  ],
+  Bar: [
+    <FormField
+      key="barType"
+      name="barType"
+      placeholder="Enter the type of bar"
+    />,
+    <Select key="priceOrder" name="priceOrder" optionsList={priceOrderList} />,
+  ],
+  Parc: [
+    <Select key="parcType" name="parcType" optionsList={parcTypesList} />,
+    <Select key="isPublic" name="isPublic" optionsList={[true, false]} />,
+    <Select
+      key="priceOrder"
+      name="priceOrder"
+      optionsList={[priceOrderList]}
+    />,
+  ],
+}
 const initialValues = {
   title: "",
   street: "",
@@ -19,20 +70,57 @@ const validationSchema = yup.object({
   postalCode: yup.number().min(5).required().label("postalCode"),
   country: yup.string().min(1).required().label("country"),
 })
-const createPage = () => {
+// eslint-disable-next-line max-lines-per-function
+const CreatePage = () => {
   const handleSubmit = async (
-    { title, street, city, postalCode, country },
+    {
+      title,
+      street,
+      city,
+      postalCode,
+      country,
+      cuisineType,
+      starNumber,
+      medianPrice,
+      artisticCurrent,
+      artType,
+      priceOrder,
+      price,
+      barType,
+      parcType,
+      isPublic,
+    },
     { resetForm },
   ) => {
+    const restaurantDetails =
+      category === "Restaurant"
+        ? { cuisineType, starNumber, medianPrice }
+        : null
+    const museumDetails =
+      category === "Museum"
+        ? { artisticCurrent, artType, priceOrder, price }
+        : null
+    const barDetails = category === "Bar" ? { barType, priceOrder } : null
+    const parcDetails =
+      category === "Parc" ? { parcType, isPublic, priceOrder, price } : null
     await axios.post("/api/address", {
       title,
       street,
       city,
       postalCode,
       country,
+      category,
+      restaurantDetails,
+      museumDetails,
+      barDetails,
+      parcDetails,
     })
     resetForm()
   }
+  const handleChange = (e) => {
+    setCategory(e.target.value)
+  }
+  const [category, setCategory] = useState("None")
 
   return (
     <>
@@ -48,10 +136,16 @@ const createPage = () => {
           <FormField name="city" placeholder="Enter city" />
           <FormField name="postalCode" placeholder="Enter the postal code" />
           <FormField name="country" placeholder="Enter country" />
+          <Select
+            name="category"
+            optionsList={categoryList}
+            onChange={handleChange}
+          />
+          {categoryFormFields[category]}
           <Button type="submit">Submit</Button>
         </Form>
       </Formik>
     </>
   )
 }
-export default createPage
+export default CreatePage

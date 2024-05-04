@@ -11,13 +11,25 @@ const handle = createRoute(async (req, res) => {
   }
 
   if (req.method === "PATCH") {
-    const { title, city, postalCode, country, restaurantDetails } = req.body
+    const {
+      title,
+      city,
+      postalCode,
+      country,
+      restaurantDetails,
+      museumDetails,
+      barDetails,
+      parcDetails,
+    } = req.body
     address.title = title || address.title
     address.city = city || address.city
     address.postalCode = postalCode || address.postalCode
     address.country = country || address.country
 
     address.restaurantDetails = restaurantDetails || address.restaurantDetails
+    address.museumDetails = museumDetails || address.museumDetails
+    address.barDetails = barDetails || address.barDetails
+    address.parcDetails = parcDetails || address.parcDetails
 
     await address.save()
     res.send(address)

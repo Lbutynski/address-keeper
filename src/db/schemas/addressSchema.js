@@ -26,7 +26,7 @@ export const AddressSchema = new Schema({
   },
   parcDetails: {
     parcType: { type: String },
-    public: { type: Boolean },
+    isPublic: { type: Boolean },
     priceOrder: { type: Number },
     price: { type: Number },
   },

@@ -3,8 +3,17 @@ import { AddressModel } from "@/db/models/AddressModel"
 const { createRoute } = require("@/api/createRoute")
 const handle = createRoute(async (req, res) => {
   if (req.method === "POST") {
-    const { title, street, city, postalCode, country, restaurantDetails } =
-      req.body
+    const {
+      title,
+      street,
+      city,
+      postalCode,
+      country,
+      restaurantDetails,
+      museumDetails,
+      barDetails,
+      parcDetails,
+    } = req.body
     const newAddress = new AddressModel({
       title,
       street,
@@ -12,6 +21,9 @@ const handle = createRoute(async (req, res) => {
       postalCode,
       country,
       restaurantDetails,
+      museumDetails,
+      barDetails,
+      parcDetails,
     })
     await newAddress.save()
     res.send(newAddress)
