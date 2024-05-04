@@ -7,6 +7,7 @@ import { Formik } from "formik"
 import * as yup from "yup"
 import { useState } from "react"
 import { Select } from "@/components/Select"
+import { useRouter } from "next/router"
 
 const categoryList = ["Other", "Restaurant", "Museum", "Bar", "Parc"]
 const cuisineList = ["French", "Japanese", "Italian"]
@@ -103,7 +104,7 @@ const CreatePage = () => {
     const barDetails = category === "Bar" ? { barType, priceOrder } : null
     const parcDetails =
       category === "Parc" ? { parcType, isPublic, priceOrder, price } : null
-    await axios.post("/api/address", {
+    const request = await axios.post("/api/address", {
       title,
       street,
       city,
@@ -115,12 +116,14 @@ const CreatePage = () => {
       barDetails,
       parcDetails,
     })
+    router.push(`/address/${request.data._id}`)
     resetForm()
   }
   const handleChange = (e) => {
     setCategory(e.target.value)
   }
   const [category, setCategory] = useState("None")
+  const router = useRouter()
 
   return (
     <>
@@ -148,4 +151,5 @@ const CreatePage = () => {
     </>
   )
 }
+// eslint-disable-next-line max-lines
 export default CreatePage
