@@ -8,14 +8,16 @@ import * as yup from "yup"
 import { useState } from "react"
 import { Select } from "@/components/Select"
 import { useRouter } from "next/router"
+import {
+  artisticCurrentList,
+  categoryList,
+  cuisineList,
+  medianPricesList,
+  parcTypesList,
+  priceOrderList,
+  starsNumberList,
+} from "@/constants/list"
 
-const categoryList = ["Other", "Restaurant", "Museum", "Bar", "Parc"]
-const cuisineList = ["French", "Japanese", "Italian"]
-const starsNumberList = ["1", "2", "3"]
-const medianPricesList = ["1", "2", "3", "4", "5"]
-const artisticCurrentList = ["Modern", "Impressionism", "Romantic"]
-const priceOrderList = ["free", "1", "2", "3", "4", "5"]
-const parcTypesList = ["Parc floral", "Parc forestier"]
 const categoryFormFields = {
   Restaurant: [
     <Select key="cuisineType" name="cuisineType" optionsList={cuisineList} />,
