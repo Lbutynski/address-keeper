@@ -13,6 +13,7 @@ const handle = createRoute(async (req, res) => {
   if (req.method === "PATCH") {
     const {
       title,
+      street,
       city,
       postalCode,
       country,
@@ -22,6 +23,7 @@ const handle = createRoute(async (req, res) => {
       parcDetails,
     } = req.body
     address.title = title || address.title
+    address.street = street || address.street
     address.city = city || address.city
     address.postalCode = postalCode || address.postalCode
     address.country = country || address.country

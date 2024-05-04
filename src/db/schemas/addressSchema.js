@@ -9,6 +9,11 @@ export const AddressSchema = new Schema({
   city: { type: String, required: true },
   postalCode: { type: Number, required: true },
   country: { type: String, required: true },
+  category: {
+    type: String,
+    required: true,
+    enum: ["Restaurant", "Museum", "Bar", "Parc", "Other"],
+  },
   restaurantDetails: {
     cuisineType: { type: String },
     starNumber: { type: Number },

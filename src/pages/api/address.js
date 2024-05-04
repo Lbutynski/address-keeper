@@ -13,6 +13,7 @@ const handle = createRoute(async (req, res) => {
       museumDetails,
       barDetails,
       parcDetails,
+      category,
     } = req.body
     const newAddress = new AddressModel({
       title,
@@ -24,6 +25,7 @@ const handle = createRoute(async (req, res) => {
       museumDetails,
       barDetails,
       parcDetails,
+      category,
     })
     await newAddress.save()
     res.send(newAddress)
