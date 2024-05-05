@@ -17,6 +17,7 @@ const handle = createRoute(async (req, res) => {
       city,
       postalCode,
       country,
+      category,
       restaurantDetails,
       museumDetails,
       barDetails,
@@ -27,7 +28,7 @@ const handle = createRoute(async (req, res) => {
     address.city = city || address.city
     address.postalCode = postalCode || address.postalCode
     address.country = country || address.country
-
+    address.category = category || address.category
     address.restaurantDetails = restaurantDetails || address.restaurantDetails
     address.museumDetails = museumDetails || address.museumDetails
     address.barDetails = barDetails || address.barDetails

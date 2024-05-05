@@ -12,7 +12,7 @@ export const AddressSchema = new Schema({
   category: {
     type: String,
     required: true,
-    enum: ["Restaurant", "Museum", "Bar", "Parc", "Other"],
+    enum: ["Restaurant", "Museum", "Bar", "Parc"],
   },
   restaurantDetails: {
     cuisineType: { type: String },
