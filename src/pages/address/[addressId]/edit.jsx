@@ -39,8 +39,11 @@ const EditPage = ({ address }) => {
     medianPrice,
     artisticCurrent,
     artType,
-    priceOrder,
-    price,
+    museumPriceOrder,
+    barPriceOrder,
+    parcPriceOrder,
+    museumPrice,
+    parcPrice,
     barType,
     parcType,
     isPublic,
@@ -58,18 +61,18 @@ const EditPage = ({ address }) => {
         ? {
             artisticCurrent,
             artType,
-            priceOrder,
-            price,
+            museumPriceOrder,
+            museumPrice,
           }
         : null
-    const barDetails = category === "Bar" ? { barType, priceOrder } : null
+    const barDetails = category === "Bar" ? { barType, barPriceOrder } : null
     const parcDetails =
       category === "Parc"
         ? {
             parcType,
             isPublic,
-            priceOrder,
-            price,
+            parcPriceOrder,
+            parcPrice,
           }
         : null
     await axios.patch(`/api/address/${address._id}`, {
@@ -100,12 +103,15 @@ const EditPage = ({ address }) => {
 
     artisticCurrent: address.museumDetails?.artisticCurrent,
     artType: address.museumDetails?.artType,
-    priceOrder: address.museumDetails?.priceOrder,
+    museumPriceOrder: address.museumDetails?.museumPriceOrder,
+    museumPrice: address.museumDetails?.museumPrice,
 
     barType: address.barDetails?.barType,
+    barPriceOrder: address.barDetails?.barPriceOrder,
     parcType: address.parcDetails?.parcType,
-
     isPublic: address.parcDetails?.isPublic,
+    parcPriceOrder: address.parcDetails?.parcPriceOrder,
+    parcPrice: address.parcDetails?.parcPrice,
   }
   const validationSchema = yup.object({
     title: yup.string().min(1).required().label("title"),
@@ -123,7 +129,7 @@ const EditPage = ({ address }) => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        <Form>
+        <Form className="m-5">
           <FormField name="title" placeholder="Enter a title" />
           <FormField name="street" placeholder="Enter number and street" />
           <FormField name="city" placeholder="Enter city" />

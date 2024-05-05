@@ -22,17 +22,17 @@ export const AddressSchema = new Schema({
   museumDetails: {
     artisticCurrent: { type: String },
     artType: { type: String },
-    priceOrder: { type: Number },
-    price: { type: Number },
+    museumPriceOrder: { type: Number },
+    museumPrice: { type: Number },
   },
   barDetails: {
     barType: { type: String },
-    priceOrder: { type: Number },
+    barPriceOrder: { type: Number },
   },
   parcDetails: {
     parcType: { type: String },
     isPublic: { type: Boolean },
-    priceOrder: { type: Number },
-    price: { type: Number },
+    parcPriceOrder: { type: Number },
+    parcPrice: { type: Number },
   },
 })

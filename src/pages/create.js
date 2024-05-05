@@ -27,37 +27,39 @@ const validationSchema = yup.object({
 })
 // eslint-disable-next-line max-lines-per-function
 const CreatePage = () => {
-  const handleSubmit = async (
-    {
-      title,
-      street,
-      city,
-      postalCode,
-      country,
-      cuisineType,
-      starNumber,
-      medianPrice,
-      artisticCurrent,
-      artType,
-      priceOrder,
-      price,
-      barType,
-      parcType,
-      isPublic,
-    },
-    { resetForm },
-  ) => {
+  const handleSubmit = async ({
+    title,
+    street,
+    city,
+    postalCode,
+    country,
+    cuisineType,
+    starNumber,
+    medianPrice,
+    artisticCurrent,
+    artType,
+    barPriceOrder,
+    museumPriceOrder,
+    parcPriceOrder,
+    museumPrice,
+    parcPrice,
+    barType,
+    parcType,
+    isPublic,
+  }) => {
     const restaurantDetails =
       category === "Restaurant"
         ? { cuisineType, starNumber, medianPrice }
         : null
     const museumDetails =
       category === "Museum"
-        ? { artisticCurrent, artType, priceOrder, price }
+        ? { artisticCurrent, artType, museumPriceOrder, museumPrice }
         : null
-    const barDetails = category === "Bar" ? { barType, priceOrder } : null
+    const barDetails = category === "Bar" ? { barType, barPriceOrder } : null
     const parcDetails =
-      category === "Parc" ? { parcType, isPublic, priceOrder, price } : null
+      category === "Parc"
+        ? { parcType, isPublic, parcPriceOrder, parcPrice }
+        : null
     const request = await axios.post("/api/address", {
       title,
       street,
@@ -71,9 +73,8 @@ const CreatePage = () => {
       parcDetails,
     })
     router.push(`/address/${request.data._id}`)
-    resetForm()
   }
-  const handleChange = (e) => {
+  const handleCategory = (e) => {
     setCategory(e.target.value)
   }
   const [category, setCategory] = useState("None")
@@ -87,7 +88,7 @@ const CreatePage = () => {
         initialValues={initialValues}
         validationSchema={validationSchema}
       >
-        <Form>
+        <Form className="m-5">
           <FormField name="title" placeholder="Enter a title" />
           <FormField name="street" placeholder="Enter number and street" />
           <FormField name="city" placeholder="Enter city" />
@@ -96,7 +97,7 @@ const CreatePage = () => {
           <Select
             name="category"
             optionsList={categoryList}
-            onChange={handleChange}
+            onChange={handleCategory}
           />
           {categoryFormFields[category]}
           <Button type="submit">Submit</Button>
