@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { Button } from "@/components/Button"
 import { Form } from "@/components/Form"
 import { FormField } from "@/components/FormField"
@@ -8,57 +9,8 @@ import * as yup from "yup"
 import { useState } from "react"
 import { Select } from "@/components/Select"
 import { useRouter } from "next/router"
-import {
-  artisticCurrentList,
-  categoryList,
-  cuisineList,
-  medianPricesList,
-  parcTypesList,
-  priceOrderList,
-  starsNumberList,
-} from "@/constants/list"
+import { categoryFormFields, categoryList } from "@/constants/list"
 
-const categoryFormFields = {
-  Restaurant: [
-    <Select key="cuisineType" name="cuisineType" optionsList={cuisineList} />,
-    <Select key="starNumber" name="starNumber" optionsList={starsNumberList} />,
-    <Select
-      key="medianPrice"
-      name="medianPrice"
-      optionsList={medianPricesList}
-    />,
-  ],
-  Museum: [
-    <Select
-      key="artisticCurrent"
-      name="artisticCurrent"
-      optionsList={artisticCurrentList}
-    />,
-    <FormField
-      key="artType"
-      name="artType"
-      placeholder="Enter the type of art"
-    />,
-    <Select key="priceOrder" name="priceOrder" optionsList={priceOrderList} />,
-  ],
-  Bar: [
-    <FormField
-      key="barType"
-      name="barType"
-      placeholder="Enter the type of bar"
-    />,
-    <Select key="priceOrder" name="priceOrder" optionsList={priceOrderList} />,
-  ],
-  Parc: [
-    <Select key="parcType" name="parcType" optionsList={parcTypesList} />,
-    <Select key="isPublic" name="isPublic" optionsList={[true, false]} />,
-    <Select
-      key="priceOrder"
-      name="priceOrder"
-      optionsList={[priceOrderList]}
-    />,
-  ],
-}
 const initialValues = {
   title: "",
   street: "",
@@ -153,5 +105,4 @@ const CreatePage = () => {
     </>
   )
 }
-// eslint-disable-next-line max-lines
 export default CreatePage
