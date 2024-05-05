@@ -15,6 +15,8 @@ export const ListComponent = ({
     href={`/address/${_id}`}
     className={clsx("m-5 bg-blue-300 rounded-lg p-5", {
       "bg-red-300": category === "Museum",
+      " bg-yellow-300": category === "Bar",
+      "bg-green-300": category === "Parc",
     })}
   >
     <div {...otherProps}>
